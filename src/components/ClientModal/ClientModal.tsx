@@ -1,0 +1,167 @@
+import { useClientModalStore } from '../../stores/useClientModalStore';
+import { useClientStore } from '../../stores/useClientStore';
+import { useAlertStore } from '../../stores/useAlertStore';
+import { X } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { clientSchema } from '../../schemas/clientSchema';
+import { useEffect } from 'react';
+
+type ClientFormData = {
+    name: string;
+    salary: string;
+    companyValuation: string;
+};
+
+const formatCurrency = (value: string): string => {
+    const numeric = value.replace(/\D/g, '');
+    const number = (parseInt(numeric || '0', 10) / 100).toFixed(2);
+    return `R$ ${Number(number).toLocaleString('pt-BR', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+    })}`;
+};
+
+const ClientModal = () => {
+    const { isOpen, mode, client, closeModal } = useClientModalStore();
+    const { showAlert } = useAlertStore();
+    const { addClient, updateClient, setCurrentPage } = useClientStore();
+
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        watch,
+        formState: { errors },
+    } = useForm<ClientFormData>({
+        resolver: yupResolver(clientSchema),
+        defaultValues: {
+            name: client?.name || '',
+            salary: client?.salary ? formatCurrency(client.salary.toString()) : '',
+            companyValuation: client?.companyValuation?.toString() || '',
+        },
+    });
+
+    const watchedSalary = watch('salary');
+    const watchedCompanyValuation = watch('companyValuation');
+
+    useEffect(() => {
+        const formatted = formatCurrency(watchedSalary || '');
+        if (watchedSalary && formatted !== watchedSalary) {
+            setValue('salary', formatted);
+        }
+    }, [watchedSalary, setValue]);
+
+    useEffect(() => {
+        const formatted = formatCurrency(watchedCompanyValuation || '');
+        if (watchedCompanyValuation && formatted !== watchedCompanyValuation) {
+            setValue('companyValuation', formatted);
+        }
+    }, [watchedCompanyValuation, setValue]);
+
+    useEffect(() => {
+        if (mode === 'edit' && client) {
+            setValue('name', client.name);
+            setValue('salary', formatCurrency(client.salary.toString()));
+            setValue('companyValuation', formatCurrency(client.companyValuation.toString()));
+        }
+    }, [client, mode, setValue]);
+
+
+
+    const onSubmit = (data: ClientFormData) => {
+        const parsedClient = {
+            name: data.name,
+            salary: parseFloat(data.salary.replace(/\D/g, '')) / 100,
+            companyValuation: parseFloat(data.companyValuation.replace(/\D/g, '')) / 100,
+        };
+
+        if (mode === 'create') {
+            addClient(parsedClient);
+            setTimeout(() => {
+                const totalAfterAdd = document.querySelectorAll('[data-client-card]').length + 1;
+                const itemsPerPage = 8;
+                const lastPage = Math.ceil(totalAfterAdd / itemsPerPage);
+                setCurrentPage(lastPage);
+            }, 0);
+            showAlert('Cliente criado com sucesso!', 'success');
+        }
+        else if (client) {
+            updateClient({
+                id: client.id,
+                ...parsedClient,
+            });
+            showAlert('Cliente atualizado com sucesso!', 'success');
+        }
+
+        closeModal();
+    };
+
+
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+            <div className="bg-white w-[400px] p-6 rounded shadow">
+                <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-xl font-bold">
+                        {mode === 'create' ? 'Criar cliente' : 'Editar cliente'}
+                    </h2>
+                    <button
+                        onClick={closeModal}
+                        className="hover:text-orange-600 cursor-pointer"
+                    >
+                        <X />
+                    </button>
+                </div>
+
+                <form onSubmit={handleSubmit(onSubmit)}>
+                    <input
+                        type="text"
+                        {...register('name')}
+                        placeholder="Digite o nome:"
+                        className={` mb-2 w-full border-2 p-2 rounded-sm ${errors.name ? 'border-red-500' : 'border-gray-300'
+                            } focus:border-orange-300 focus:outline-none`}
+                    />
+                    {errors.name && (
+                        <p className="text-red-500 text-sm mb-4">{errors.name.message}</p>
+                    )}
+
+                    <input
+                        type="text"
+                        {...register('salary')}
+                        placeholder="Digite o salário:"
+                        className={` mb-2 w-full border-2 p-2 rounded-sm ${errors.salary ? 'border-red-500' : 'border-gray-300'
+                            } focus:border-orange-300 focus:outline-none`}
+                    />
+                    {errors.salary && (
+                        <p className="text-red-500 text-sm mb-4">{errors.salary.message}</p>
+                    )}
+
+                    <input
+                        type="text"
+                        {...register('companyValuation')}
+                        placeholder="Digite o valor da empresa:"
+                        className={` mb-2 w-full border-2 p-2 rounded-sm ${errors.companyValuation ? 'border-red-500' : 'border-gray-300'
+                            } focus:border-orange-300 focus:outline-none`}
+                    />
+                    {errors.companyValuation && (
+                        <p className="text-red-500 text-sm mb-4">
+                            {errors.companyValuation.message}
+                        </p>
+                    )}
+
+                    <button
+                        type="submit"
+                        className="bg-orange-500 text-white px-4 py-2 rounded w-full hover:bg-orange-600 cursor-pointer"
+                    >
+                        {mode === 'create' ? 'Criar cliente' : 'Editar cliente'}
+                    </button>
+                </form>
+            </div>
+        </div>
+    );
+};
+
+export default ClientModal;

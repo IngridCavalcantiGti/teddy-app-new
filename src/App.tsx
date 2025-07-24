@@ -3,10 +3,12 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import ClientsPage from "./pages/ClientsPage/ClientsPage";
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import { Suspense } from "react";
+import Alert from "./components/Alert/Alert";
 
 function App() {
   return (
     <BrowserRouter>
+     <Alert />
       <Routes>
         <Route path="/" element={<LoginPage />} />
         

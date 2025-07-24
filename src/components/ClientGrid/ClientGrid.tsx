@@ -1,11 +1,5 @@
 import ClientCard from '../ClientCard/ClientCard';
-
-interface Client {
-  id: number;
-  name: string;
-  salary: number;
-  companyValuation: number;
-}
+import type { Client } from '../../types/clientTypes'; 
 
 interface ClientsGridProps {
   clients: Client[];
@@ -27,4 +21,3 @@ const ClientsGrid = ({ clients }: ClientsGridProps) => {
 };
 
 export default ClientsGrid;
-
