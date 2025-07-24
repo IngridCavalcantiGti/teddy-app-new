@@ -9,19 +9,22 @@ import Pagination from "../../components/Pagination/Pagination";
 const ClientsPage = () => {
     const [clients, setClients] = useState([]);
     const [perPage, setPerPage] = useState(16);
-    const [totalClients, setTotalClients] = useState(0);
+    const [totalPages, setTotalPages] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+   
 
     useEffect(() => {
         axios
-            .get(`https://boasorte.teddybackoffice.com.br/users?page=1&limit=${perPage}`)
+            .get(`https://boasorte.teddybackoffice.com.br/users?page=${currentPage}&limit=${perPage}`)
             .then((res) => {
+                console.log(res.data);
                 setClients(res.data.clients);
-                setTotalClients(res.data.total || res.data.clients.length);
+                setTotalPages(res.data.totalPages);
             })
             .catch((err) => {
                 console.error("Erro ao buscar clientes:", err);
             });
-    }, [perPage]);
+    }, [perPage, currentPage]);
 
     return (
         <div className="min-h-screen bg-gray-100 flex">
@@ -29,13 +32,18 @@ const ClientsPage = () => {
                 <div className="max-w-screen-xl mx-auto">
 
                     <ClientsHeader
-                        totalClients={totalClients}
+                        totalClients={clients.length}
                         perPage={perPage}
                         onChangePerPage={setPerPage}
                     />
                     <ClientGrid clients={clients} />
                     <ClientButton />
-                    <Pagination />
+                    <Pagination
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        totalPages={totalPages}
+                    />
+
                 </div>
             </div>
         </div>

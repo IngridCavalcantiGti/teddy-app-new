@@ -1,13 +1,27 @@
-const Pagination = () => {
+interface PaginationProps {
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  totalPages: number;
+}
+
+const Pagination = ({ currentPage, setCurrentPage, totalPages }: PaginationProps) => {
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
   return (
     <div className="flex justify-center items-center gap-2 pb-6 font-bold">
-      <button>1</button>
-      <span>...</span>
-      <button>3</button>
-      <button className="bg-orange-500 text-white px-3 py-1 rounded">4</button>
-      <button>5</button>
-      <span>...</span>
-      <button>12</button>
+      {pages.map((page) => (
+        <button
+          key={page}
+          onClick={() => setCurrentPage(page)}
+          className={`px-3 py-1 rounded ${
+            currentPage === page
+              ? 'bg-orange-500 text-white'
+              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+          }`}
+        >
+          {page}
+        </button>
+      ))}
     </div>
   );
 };
