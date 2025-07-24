@@ -11,9 +11,10 @@ interface ClientState {
   setPerPage: (page: number) => void;
   setCurrentPage: (page: number) => void;
   setTotalPages: (total: number) => void;
-  addClient: (client: NewClient) => void;
+  addClient: (client: NewClient) => Promise<void>;
   updateClient: (client: Client) => void;
   deleteClient: (id: number) => Promise<void>;
+  fetchClients: () => Promise<void>;
 }
 
 export const useClientStore = create<ClientState>((set, get) => ({
@@ -24,35 +25,41 @@ export const useClientStore = create<ClientState>((set, get) => ({
 
   setClients: (clients) => set({ clients }),
 
-setPerPage: (newPerPage) => {
-  const { clients, currentPage } = get();
-  const newTotalPages = Math.ceil(clients.length / newPerPage);
-  const updatedPage = currentPage > newTotalPages ? newTotalPages : currentPage;
+  setPerPage: (newPerPage) => {
+    const { clients, currentPage } = get();
+    const newTotalPages = Math.ceil(clients.length / newPerPage);
+    const updatedPage = currentPage > newTotalPages ? newTotalPages : currentPage;
 
-  set({
-    perPage: newPerPage,
-    currentPage: updatedPage,
-    totalPages: newTotalPages,
-  });
-},
-
-
+    set({
+      perPage: newPerPage,
+      currentPage: updatedPage,
+      totalPages: newTotalPages,
+    });
+  },
 
   setCurrentPage: (page) => set({ currentPage: page }),
 
   setTotalPages: (total) => set({ totalPages: total }),
 
-  addClient: (client) => {
-    const state = get();
-    const newClient: Client = { ...client, id: Date.now() };
-    const updatedClients = [...state.clients, newClient];
-    const newTotalPages = Math.ceil(updatedClients.length / state.perPage);
+  addClient: async (client) => {
+    try {
+      await api.post('/users', client);
 
-    set({
-      clients: updatedClients,
-      totalPages: newTotalPages,
-      currentPage: newTotalPages,
-    });
+     
+      const responseAll = await api.get('/users');
+      const newTotalPages = responseAll.data.totalPages;
+
+     
+      const lastPageResponse = await api.get(`/users?page=${newTotalPages}&limit=${get().perPage}`);
+
+      set({
+        clients: lastPageResponse.data.clients,
+        totalPages: newTotalPages,
+        currentPage: newTotalPages,
+      });
+    } catch (error) {
+      console.error('Erro ao adicionar cliente:', error);
+    }
   },
 
   updateClient: (updatedClient) =>
@@ -62,11 +69,30 @@ setPerPage: (newPerPage) => {
       ),
     })),
 
-    deleteClient: async (id: number) => {
-    await api.delete(`/users/${id}`);
-    set((state) => ({
-    clients: state.clients.filter((client) => client.id !== id)
-  }));
-}
+  deleteClient: async (id: number) => {
+    try {
+      await api.delete(`/users/${id}`);
+      await get().fetchClients();
+    } catch (error) {
+      console.error('Erro ao deletar cliente:', error);
+    }
+  },
 
+  fetchClients: async () => {
+    const { currentPage, perPage, setClients, setTotalPages, setCurrentPage } = get();
+
+    try {
+      const response = await api.get(`/users?page=${currentPage}&limit=${perPage}`);
+      const data = response.data;
+
+      setClients(data.clients);
+      setTotalPages(data.totalPages);
+
+      if (currentPage > data.totalPages) {
+        setCurrentPage(data.totalPages);
+      }
+    } catch (error) {
+      console.error("Erro ao buscar clientes:", error);
+    }
+  },
 }));
