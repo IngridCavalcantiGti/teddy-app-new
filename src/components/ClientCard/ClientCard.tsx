@@ -3,6 +3,7 @@ import { useClientModalStore } from '../../stores/useClientModalStore';
 import { useDeleteModalStore } from '../../stores/useDeleteModalStore';
 
 interface Props {
+  id: number
   name: string;
   salary: number;
   companyValuation: number;
@@ -15,7 +16,7 @@ const formatCurrency = (value: number): string => {
   })}`;
 };
 
-const ClientCard = ({ name, salary, companyValuation }: Props) => {
+const ClientCard = ({ id, name, salary, companyValuation }: Props) => {
   const { openModal } = useClientModalStore();
   const { openDeleteModal } = useDeleteModalStore();
 
@@ -42,7 +43,7 @@ const ClientCard = ({ name, salary, companyValuation }: Props) => {
         <button onClick={handleEdit}>
           <Pencil className="w-4 h-4 cursor-pointer" />
         </button>
-        <button onClick={() => openDeleteModal(name)}>
+       <button onClick={() => openDeleteModal(id, name)}>
           <Trash2 className="w-5 h-5 text-red-500 cursor-pointer" />
         </button>
       </div>

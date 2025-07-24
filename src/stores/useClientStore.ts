@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import type { Client, NewClient } from '../types/clientTypes';
+import { api } from '../services/api';
 
 interface ClientState {
   clients: Client[];
@@ -12,6 +13,7 @@ interface ClientState {
   setTotalPages: (total: number) => void;
   addClient: (client: NewClient) => void;
   updateClient: (client: Client) => void;
+  deleteClient: (id: number) => Promise<void>;
 }
 
 export const useClientStore = create<ClientState>((set, get) => ({
@@ -59,4 +61,12 @@ setPerPage: (newPerPage) => {
         client.id === updatedClient.id ? updatedClient : client
       ),
     })),
+
+    deleteClient: async (id: number) => {
+    await api.delete(`/users/${id}`);
+    set((state) => ({
+    clients: state.clients.filter((client) => client.id !== id)
+  }));
+}
+
 }));

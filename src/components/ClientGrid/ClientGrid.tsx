@@ -11,6 +11,7 @@ const ClientsGrid = ({ clients }: ClientsGridProps) => {
       {clients.map((client) => (
         <ClientCard
           key={client.id}
+          id={client.id}
           name={client.name}
           salary={client.salary}
           companyValuation={client.companyValuation}

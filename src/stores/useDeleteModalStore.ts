@@ -2,14 +2,18 @@ import { create } from 'zustand';
 
 interface DeleteModalState {
   isOpen: boolean;
+  clientId: number | null;
   clientName: string | null;
-  openDeleteModal: (clientName: string) => void;
+  openDeleteModal: (id: number, name: string) => void;
   closeDeleteModal: () => void;
 }
 
 export const useDeleteModalStore = create<DeleteModalState>((set) => ({
   isOpen: false,
-  clientName: null,
-  openDeleteModal: (clientName) => set({ isOpen: true, clientName }),
-  closeDeleteModal: () => set({ isOpen: false, clientName: null }),
+  clientId: null,
+  clientName: '',
+  openDeleteModal: (id: number, name: string) =>
+    set({ isOpen: true, clientId: id, clientName: name }),
+  closeDeleteModal: () =>
+    set({ isOpen: false, clientId: null, clientName: null }),
 }));
