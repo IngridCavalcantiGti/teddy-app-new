@@ -16,7 +16,7 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }: PaginationProps
           className={`px-3 py-1 rounded ${
             currentPage === page
               ? 'bg-orange-500 text-white'
-              : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              : 'text-gray-700 hover:bg-gray-300'
           }`}
         >
           {page}

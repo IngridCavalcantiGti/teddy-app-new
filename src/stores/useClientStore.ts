@@ -22,7 +22,19 @@ export const useClientStore = create<ClientState>((set, get) => ({
 
   setClients: (clients) => set({ clients }),
 
-  setPerPage: (page) => set({ perPage: page }),
+setPerPage: (newPerPage) => {
+  const { clients, currentPage } = get();
+  const newTotalPages = Math.ceil(clients.length / newPerPage);
+  const updatedPage = currentPage > newTotalPages ? newTotalPages : currentPage;
+
+  set({
+    perPage: newPerPage,
+    currentPage: updatedPage,
+    totalPages: newTotalPages,
+  });
+},
+
+
 
   setCurrentPage: (page) => set({ currentPage: page }),
 
