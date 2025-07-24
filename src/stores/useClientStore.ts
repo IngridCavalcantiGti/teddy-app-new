@@ -38,7 +38,6 @@ export const useClientStore = create<ClientState>((set, get) => ({
   },
 
   setCurrentPage: (page) => set({ currentPage: page }),
-
   setTotalPages: (total) => set({ totalPages: total }),
 
   addClient: async (client) => {
@@ -49,14 +48,12 @@ export const useClientStore = create<ClientState>((set, get) => ({
       const responseAll = await api.get('/users');
       const newTotalPages = responseAll.data.totalPages;
 
-     
       const lastPageResponse = await api.get(`/users?page=${newTotalPages}&limit=${get().perPage}`);
 
-      set({
-        clients: lastPageResponse.data.clients,
+      set((state) => ({
+        clients: state.currentPage === newTotalPages ? lastPageResponse.data.clients : state.clients,
         totalPages: newTotalPages,
-        currentPage: newTotalPages,
-      });
+      }));
     } catch (error) {
       console.error('Erro ao adicionar cliente:', error);
     }
