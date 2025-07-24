@@ -1,33 +1,27 @@
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from './pages/LoginPage/LoginPage'
-// import { lazy, Suspense } from "react";
-
-
-import './App.css'
-
-
-// const ClientsPage = lazy(() => import("clients/ClientsPage"));
-
+import LoginPage from "./pages/LoginPage/LoginPage";
+import ClientsPage from "./pages/ClientsPage/ClientsPage";
+import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
+import { Suspense } from "react";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        {/* <Route
-          path="/clients"
-          element={
-            <Suspense fallback={<div className="flex justify-center items-center h-screen bg-gray-50 text-black">
-              Carregando...
-            </div>}>
+        
+        <Route path="/clientes" element={<AuthenticatedLayout />}>
+          <Route index element={
+            <Suspense fallback={<div className="flex justify-center items-center h-screen bg-white">Carregando...</div>}>
               <ClientsPage />
             </Suspense>
-          }
-        /> */}
+          } />
+        </Route>
+          {/* <Route path="/clientes-selecionados" element={<LoginPage />} /> */}
+
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

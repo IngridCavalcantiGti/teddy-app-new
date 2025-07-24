@@ -7,7 +7,7 @@ export default function LoginPage() {
 
     const handleLogin = () => {
         if (!name.trim()) return
-        navigate('/clients')
+        navigate('/clientes')
     }
 
     return (
