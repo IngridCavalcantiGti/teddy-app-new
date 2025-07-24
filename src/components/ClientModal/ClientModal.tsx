@@ -96,9 +96,9 @@ const ClientModal = () => {
             }, 0);
             showAlert('Cliente criado com sucesso!', 'success');
         }
-        else if (client) {
+        else if (client?.id !== undefined) {
             updateClient({
-                id: client.id,
+                id: client.id as number,
                 ...parsedClient,
             });
             showAlert('Cliente atualizado com sucesso!', 'success');

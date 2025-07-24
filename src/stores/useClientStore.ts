@@ -59,12 +59,24 @@ export const useClientStore = create<ClientState>((set, get) => ({
     }
   },
 
-  updateClient: (updatedClient) =>
+updateClient: async (updatedClient) => {
+  try {
+    const response = await api.patch(`/users/${updatedClient.id}`, {
+      name: updatedClient.name,
+      salary: updatedClient.salary,
+      companyValuation: updatedClient.companyValuation,
+    });
+
     set((state) => ({
       clients: state.clients.map((client) =>
-        client.id === updatedClient.id ? updatedClient : client
+        client.id === updatedClient.id ? response.data : client
       ),
-    })),
+    }));
+  } catch (error) {
+    console.error('Erro ao atualizar cliente:', error);
+  }
+},
+
 
   deleteClient: async (id: number) => {
     try {

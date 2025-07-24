@@ -22,6 +22,7 @@ const ClientCard = ({ id, name, salary, companyValuation }: Props) => {
 
   const handleEdit = () => {
     openModal('edit', {
+      id,
       name,
       salary,
       companyValuation,
@@ -43,7 +44,7 @@ const ClientCard = ({ id, name, salary, companyValuation }: Props) => {
         <button onClick={handleEdit}>
           <Pencil className="w-4 h-4 cursor-pointer" />
         </button>
-       <button onClick={() => openDeleteModal(id, name)}>
+        <button onClick={() => openDeleteModal(id, name)}>
           <Trash2 className="w-5 h-5 text-red-500 cursor-pointer" />
         </button>
       </div>
