@@ -15,6 +15,8 @@ interface ClientState {
   updateClient: (client: Client) => void;
   deleteClient: (id: number) => Promise<void>;
   fetchClients: () => Promise<void>;
+   username: string;
+  setUsername: (name: string) => void;
 }
 
 export const useClientStore = create<ClientState>((set, get) => ({
@@ -22,6 +24,8 @@ export const useClientStore = create<ClientState>((set, get) => ({
   perPage: 8,
   currentPage: 1,
   totalPages: 1,
+  username: '',
+  setUsername: (name: string) => set({ username: name }),
 
   setClients: (clients) => set({ clients }),
 

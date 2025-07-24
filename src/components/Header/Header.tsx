@@ -2,6 +2,7 @@ import React from 'react';
 import logo from '../../assets/teddy.svg';
 import iconMenu from '../../assets/menu-svgrepo-com 1.svg';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useClientStore } from '../../stores/useClientStore';
 
 interface HeaderProps {
   onToggleSidebar: () => void;
@@ -10,7 +11,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
   const location = useLocation();
   const navigate = useNavigate();
-
+  const username = useClientStore((state) => state.username);
   const isActive = (path: string) => location.pathname === path;
 
   const handleLogout = () => {
@@ -18,50 +19,50 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
   };
 
   return (
-    <header className="w-full bg-white shadow-sm py-5 relative font-inter z-40">
-      <div className="max-w-screen-xl flex items-center justify-between px-4 md:px-10">
+    <header className="w-full bg-white shadow-sm py-5 font-inter z-40">
+      <div className="w-full px-4 sm:px-8 lg:px-16 flex items-center justify-between">
+
+        
         <div className="flex items-center gap-4">
-          <button
-            onClick={onToggleSidebar}
-            className="bg-transparent p-2"
-            aria-label="Menu"
-          >
-            <img src={iconMenu} alt="Menu" className="h-5 cursor-pointer" />
+          <button onClick={onToggleSidebar} className="p-2" aria-label="Menu">
+            <img src={iconMenu} alt="Menu" className="h-5" />
           </button>
-          <img src={logo} alt="Teddy Logo" className="h-12" />
+          <img src={logo} alt="Teddy Logo" className="h-10" />
         </div>
 
-    
-        <nav className="hidden md:flex text-[16px] gap-6">
+      
+        <nav className="hidden sm:flex gap-10 text-[16px]">
           <Link
             to="/clientes"
-            className={`font-medium ${
-              isActive('/clientes') ? 'text-orange-600 underline' : 'text-gray-600 hover:underline'
-            }`}
+            className={`font-medium ${isActive('/clientes') ? 'text-orange-600 underline' : 'text-gray-600 hover:underline'
+              }`}
           >
             Clientes
           </Link>
           <Link
             to="/clientes-selecionados"
-            className={`font-medium ${
-              isActive('/clientes-selecionados') ? 'text-orange-600 underline' : 'text-gray-600 hover:underline'
-            }`}
+            className={`font-medium ${isActive('/clientes-selecionados') ? 'text-orange-600 underline' : 'text-gray-600 hover:underline'
+              }`}
           >
             Clientes selecionados
           </Link>
-          <button
-            onClick={handleLogout}
-            className="font-medium text-gray-600 hover:underline"
-          >
+          <button onClick={handleLogout} className="font-medium text-gray-600 hover:underline">
             Sair
           </button>
         </nav>
 
-        <div className="hidden md:block text-black text-[16px]">
-          Olá, <strong>Usuário!</strong>
+      
+        <div className="text-black text-[16px] whitespace-nowrap ml-4">
+          Olá, <strong>{username || 'usuário'}</strong>
         </div>
       </div>
     </header>
+
+
+
+
+
+
   );
 };
 

@@ -7,11 +7,11 @@ interface ClientsHeaderProps {
 const ClientsHeader = ({ totalClients, perPage, onChangePerPage }: ClientsHeaderProps) => {
   return (
     <div className="flex items-center justify-between w-full">
-      <span className="text-[18px]">
+      <span className="text-[18px] ml-4">
         <strong>{totalClients}</strong> clientes encontrados:
       </span>
 
-      <label className="text-[18px] flex items-center gap-2">
+      <label className="text-[18px] flex items-center gap-2 mr-5">
         Clientes por página:
         <select
           className="border border-gray-300 rounded px-2 py-1 text-sm"

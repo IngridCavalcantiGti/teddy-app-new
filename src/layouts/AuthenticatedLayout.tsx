@@ -20,7 +20,7 @@ export default function AuthenticatedLayout() {
         <div className="min-h-screen bg-gray-100">
             <Header onToggleSidebar={handleToggleSidebar} />
              <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
-            <main className="px-4 py-6">
+            <main className="px-15 py-6">
                 <Outlet />
             </main>
         </div>

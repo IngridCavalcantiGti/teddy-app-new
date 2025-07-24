@@ -33,7 +33,11 @@ const ClientsPage = () => {
             onChangePerPage={(newPerPage) => setPerPage(newPerPage)}
           />
 
-          <ClientGrid clients={clients} />
+          <div className="w-full px-4">
+            
+              <ClientGrid clients={clients} />
+          
+          </div>
           <ClientButton />
           <Pagination
             currentPage={currentPage}
