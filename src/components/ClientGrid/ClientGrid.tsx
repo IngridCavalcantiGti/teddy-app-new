@@ -1,5 +1,5 @@
 import ClientCard from '../ClientCard/ClientCard';
-import type { Client } from '../../types/clientTypes'; 
+import type { Client } from '../../types/clientTypes';
 
 interface ClientsGridProps {
   clients: Client[];
@@ -12,8 +12,8 @@ const ClientsGrid = ({ clients }: ClientsGridProps) => {
         <ClientCard
           key={client.id}
           name={client.name}
-          salary={`R$ ${client.salary.toLocaleString('pt-BR')}`}
-          company={`R$ ${client.companyValuation.toLocaleString('pt-BR')}`}
+          salary={client.salary}
+          companyValuation={client.companyValuation}
         />
       ))}
     </div>

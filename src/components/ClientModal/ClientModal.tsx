@@ -14,13 +14,14 @@ type ClientFormData = {
 };
 
 const formatCurrency = (value: string): string => {
-    const numeric = value.replace(/\D/g, '');
+    const numeric = value.replace(/[^\d]/g, '');
     const number = (parseInt(numeric || '0', 10) / 100).toFixed(2);
     return `R$ ${Number(number).toLocaleString('pt-BR', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
     })}`;
 };
+
 
 const ClientModal = () => {
     const { isOpen, mode, client, closeModal } = useClientModalStore();
@@ -31,16 +32,13 @@ const ClientModal = () => {
         register,
         handleSubmit,
         setValue,
+        reset,
         watch,
         formState: { errors },
     } = useForm<ClientFormData>({
         resolver: yupResolver(clientSchema),
-        defaultValues: {
-            name: client?.name || '',
-            salary: client?.salary ? formatCurrency(client.salary.toString()) : '',
-            companyValuation: client?.companyValuation?.toString() || '',
-        },
     });
+
 
     const watchedSalary = watch('salary');
     const watchedCompanyValuation = watch('companyValuation');
@@ -60,12 +58,24 @@ const ClientModal = () => {
     }, [watchedCompanyValuation, setValue]);
 
     useEffect(() => {
+        if (!isOpen) return;
+
         if (mode === 'edit' && client) {
-            setValue('name', client.name);
-            setValue('salary', formatCurrency(client.salary.toString()));
-            setValue('companyValuation', formatCurrency(client.companyValuation.toString()));
+            reset({
+                name: client.name,
+                salary: formatCurrency((client.salary * 100).toString()),
+                companyValuation: formatCurrency((client.companyValuation * 100).toString()),
+            });
         }
-    }, [client, mode, setValue]);
+
+        if (mode === 'create') {
+            reset({
+                name: '',
+                salary: '',
+                companyValuation: '',
+            });
+        }
+    }, [isOpen, mode, client, reset]);
 
 
 
