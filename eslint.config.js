@@ -11,7 +11,7 @@ import { globalIgnores } from "eslint/config";
 export default tseslint.config([
   globalIgnores(["dist"]),
   {
-    files: ["src/*/.{ts,tsx}"],
+    files: ["src/*/.{ts,tsx}", ".storybook/*/.{ts,tsx}"],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
