@@ -17,6 +17,15 @@ interface ClientState {
   fetchClients: () => Promise<void>;
    username: string;
   setUsername: (name: string) => void;
+    selectedClients: Client[];
+  addToSelected: (client: Client) => void;
+  removeFromSelected: (id: number) => void;
+  isSelected: (id: number) => boolean;
+  clearSelected: () => void;
+  isLoading: boolean;
+setIsLoading: (loading: boolean) => void;
+
+
 }
 
 export const useClientStore = create<ClientState>((set, get) => ({
@@ -25,6 +34,25 @@ export const useClientStore = create<ClientState>((set, get) => ({
   currentPage: 1,
   totalPages: 1,
   username: '',
+    selectedClients: [],
+    isLoading: false,
+setIsLoading: (loading) => set({ isLoading: loading }),
+
+
+  addToSelected: (client) =>
+    set((state) => ({
+      selectedClients: [...state.selectedClients, client],
+    })),
+
+  removeFromSelected: (id) =>
+    set((state) => ({
+      selectedClients: state.selectedClients.filter((c) => c.id !== id),
+    })),
+
+  isSelected: (id) => get().selectedClients.some((c) => c.id === id),
+
+  clearSelected: () => set({ selectedClients: [] }),
+
   setUsername: (name: string) => set({ username: name }),
 
   setClients: (clients) => set({ clients }),
@@ -91,21 +119,33 @@ updateClient: async (updatedClient) => {
     }
   },
 
-  fetchClients: async () => {
-    const { currentPage, perPage, setClients, setTotalPages, setCurrentPage } = get();
+fetchClients: async () => {
+  const {
+    currentPage,
+    perPage,
+    setClients,
+    setTotalPages,
+    setCurrentPage,
+    setIsLoading
+  } = get();
 
-    try {
-      const response = await api.get(`/users?page=${currentPage}&limit=${perPage}`);
-      const data = response.data;
+  try {
+    setIsLoading(true);
 
-      setClients(data.clients);
-      setTotalPages(data.totalPages);
+    const response = await api.get(`/users?page=${currentPage}&limit=${perPage}`);
+    const data = response.data;
 
-      if (currentPage > data.totalPages) {
-        setCurrentPage(data.totalPages);
-      }
-    } catch (error) {
-      console.error("Erro ao buscar clientes:", error);
+    setClients(data.clients);
+    setTotalPages(data.totalPages);
+
+    if (currentPage > data.totalPages) {
+      setCurrentPage(data.totalPages);
     }
-  },
+  } catch (error) {
+    console.error("Erro ao buscar clientes:", error);
+  } finally {
+    setIsLoading(false); 
+  }
+},
+
 }));

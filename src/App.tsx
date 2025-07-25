@@ -4,14 +4,14 @@ import ClientsPage from "./pages/ClientsPage/ClientsPage";
 import AuthenticatedLayout from "./layouts/AuthenticatedLayout";
 import { Suspense } from "react";
 import Alert from "./components/Alert/Alert";
+import ClientsSelectedPage from "./pages/ClientsSelectedPage/ClientsSelectedPage";
 
 function App() {
   return (
     <BrowserRouter>
-     <Alert />
+      <Alert />
       <Routes>
         <Route path="/" element={<LoginPage />} />
-        
         <Route path="/clientes" element={<AuthenticatedLayout />}>
           <Route index element={
             <Suspense fallback={<div className="flex justify-center items-center h-screen bg-white">Carregando...</div>}>
@@ -19,8 +19,11 @@ function App() {
             </Suspense>
           } />
         </Route>
-          {/* <Route path="/clientes-selecionados" element={<LoginPage />} /> */}
-
+        <Route path="/clientes-selecionados" element={<AuthenticatedLayout />}>
+          <Route index element={         
+              <ClientsSelectedPage />     
+          } />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
