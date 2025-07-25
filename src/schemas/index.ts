@@ -1,1 +1,1 @@
-export * from "./clientSchema";
+export * from "./clientSchema"

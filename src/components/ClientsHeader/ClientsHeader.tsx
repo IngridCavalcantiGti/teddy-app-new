@@ -1,14 +1,10 @@
 interface ClientsHeaderProps {
-  totalClients: number;
-  perPage: number;
-  onChangePerPage: (value: number) => void;
+  totalClients: number
+  perPage: number
+  onChangePerPage: (value: number) => void
 }
 
-const ClientsHeader = ({
-  totalClients,
-  perPage,
-  onChangePerPage,
-}: ClientsHeaderProps) => {
+const ClientsHeader = ({ totalClients, perPage, onChangePerPage }: ClientsHeaderProps) => {
   return (
     <div className="flex items-center justify-between w-full">
       <span className="text-[18px] ml-4">
@@ -29,7 +25,7 @@ const ClientsHeader = ({
         </select>
       </label>
     </div>
-  );
-};
+  )
+}
 
-export { ClientsHeader };
+export { ClientsHeader }

@@ -1,14 +1,14 @@
 type Client = {
-  id: number;
-  name: string;
-  salary: number;
-  companyValuation: number;
-};
+  id: number
+  name: string
+  salary: number
+  companyValuation: number
+}
 
 type PaginatedClientsResponse = {
-  currentPage: number;
-  totalPages: number;
-  clients: Client[];
-};
+  currentPage: number
+  totalPages: number
+  clients: Client[]
+}
 
-type NewClient = Omit<Client, "id">;
+type NewClient = Omit<Client, "id">

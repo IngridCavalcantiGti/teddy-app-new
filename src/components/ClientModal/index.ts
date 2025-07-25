@@ -1,1 +1,1 @@
-export * from "./ClientModal";
+export * from "./ClientModal"

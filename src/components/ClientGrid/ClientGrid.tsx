@@ -1,8 +1,8 @@
-import { ClientCard } from "@/components";
-import type { Client } from "@/types/clientTypes";
+import { ClientCard } from "@/components"
+import type { Client } from "@/types/clientTypes"
 
 interface ClientsGridProps {
-  clients: Client[];
+  clients: Client[]
 }
 
 const ClientGrid = ({ clients }: ClientsGridProps) => {
@@ -18,7 +18,7 @@ const ClientGrid = ({ clients }: ClientsGridProps) => {
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export { ClientGrid };
+export { ClientGrid }

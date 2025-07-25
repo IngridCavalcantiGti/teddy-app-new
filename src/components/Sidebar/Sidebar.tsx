@@ -1,27 +1,23 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import logo from "@/assets/teddy.svg";
-import { Home, Users, User, CircleArrowLeft, LogOut } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import React from "react"
+import { Link, useLocation } from "react-router-dom"
+import logo from "@/assets/teddy.svg"
+import { Home, Users, User, CircleArrowLeft, LogOut } from "lucide-react"
+import { useNavigate } from "react-router-dom"
 
 interface SidebarProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean
+  onClose: () => void
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
-  const location = useLocation();
-  const isActive = (path: string) => location.pathname === path;
-  const navigate = useNavigate();
-
+  const location = useLocation()
+  const isActive = (path: string) => location.pathname === path
+  const navigate = useNavigate()
 
   return (
     <>
       {isOpen && (
-        <div
-          className="fixed inset-0 z-40  bg-black bg-opacity-50 opacity-50"
-          onClick={onClose}
-        />
+        <div className="fixed inset-0 z-40  bg-black bg-opacity-50 opacity-50" onClick={onClose} />
       )}
 
       <div
@@ -44,10 +40,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         <nav className="flex flex-col gap-6 px-6 py-10 text-[15px] font-medium">
           <Link
             to="/"
-            className={`flex items-center gap-3 ${isActive("/")
-                ? "text-orange-600"
-                : "text-black hover:text-orange-500"
-              }`}
+            className={`flex items-center gap-3 ${
+              isActive("/") ? "text-orange-600" : "text-black hover:text-orange-500"
+            }`}
           >
             <Home size={18} />
             Home
@@ -55,10 +50,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
           <Link
             to="/clients"
-            className={`flex items-center gap-3 ${isActive("/clients")
-                ? "text-orange-600"
-                : "text-black hover:text-orange-500"
-              }`}
+            className={`flex items-center gap-3 ${
+              isActive("/clients") ? "text-orange-600" : "text-black hover:text-orange-500"
+            }`}
           >
             <Users size={18} />
             Clientes
@@ -66,10 +60,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
           <Link
             to="/selected-clients"
-            className={`flex items-center gap-3 ${isActive("/selected-clients")
-                ? "text-orange-600"
-                : "text-black hover:text-orange-500"
-              }`}
+            className={`flex items-center gap-3 ${
+              isActive("/selected-clients") ? "text-orange-600" : "text-black hover:text-orange-500"
+            }`}
           >
             <User size={18} />
             Clientes selecionados
@@ -85,7 +78,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         </nav>
       </div>
     </>
-  );
-};
+  )
+}
 
-export { Sidebar };
+export { Sidebar }

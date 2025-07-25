@@ -1,17 +1,17 @@
-import { Header, Sidebar } from "@/components";
-import { Outlet } from "react-router-dom";
-import { useState } from "react";
+import { Header, Sidebar } from "@/components"
+import { Outlet } from "react-router-dom"
+import { useState } from "react"
 
 const AuthenticatedLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
   const handleToggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
-  };
+    setIsSidebarOpen((prev) => !prev)
+  }
 
   const handleCloseSidebar = () => {
-    setIsSidebarOpen(false);
-  };
+    setIsSidebarOpen(false)
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -21,7 +21,7 @@ const AuthenticatedLayout = () => {
         <Outlet />
       </main>
     </div>
-  );
-};
+  )
+}
 
-export { AuthenticatedLayout };
+export { AuthenticatedLayout }

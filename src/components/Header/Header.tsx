@@ -1,22 +1,22 @@
-import React from "react";
-import logo from "@/assets/teddy.svg";
-import iconMenu from "@/assets/menu-svgrepo.svg";
-import { useLocation, Link, useNavigate } from "react-router-dom";
-import { useClientStore } from "@/stores";
+import React from "react"
+import logo from "@/assets/teddy.svg"
+import iconMenu from "@/assets/menu-svgrepo.svg"
+import { useLocation, Link, useNavigate } from "react-router-dom"
+import { useClientStore } from "@/stores"
 
 interface HeaderProps {
-  onToggleSidebar: () => void;
+  onToggleSidebar: () => void
 }
 
 const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const username = useClientStore((state) => state.username);
-  const isActive = (path: string) => location.pathname === path;
+  const location = useLocation()
+  const navigate = useNavigate()
+  const username = useClientStore((state) => state.username)
+  const isActive = (path: string) => location.pathname === path
 
   const handleLogout = () => {
-    navigate("/");
-  };
+    navigate("/")
+  }
 
   return (
     <header className="w-full bg-white shadow-sm py-5 font-inter z-40">
@@ -32,9 +32,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
           <Link
             to="/clients"
             className={`font-medium ${
-              isActive("/clients")
-                ? "text-orange-600 underline"
-                : "text-gray-600 hover:underline"
+              isActive("/clients") ? "text-orange-600 underline" : "text-gray-600 hover:underline"
             }`}
           >
             Clientes
@@ -49,10 +47,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
           >
             Clientes selecionados
           </Link>
-          <button
-            onClick={handleLogout}
-            className="font-medium text-gray-600 hover:underline"
-          >
+          <button onClick={handleLogout} className="font-medium text-gray-600 hover:underline">
             Sair
           </button>
         </nav>
@@ -62,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar }) => {
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
-export { Header };
+export { Header }

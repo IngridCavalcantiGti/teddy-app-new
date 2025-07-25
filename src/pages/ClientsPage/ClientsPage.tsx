@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useClientStore } from "@/stores";
+import { useEffect } from "react"
+import { useClientStore } from "@/stores"
 import {
   ClientButton,
   ClientGrid,
@@ -7,9 +7,8 @@ import {
   Pagination,
   ClientModal,
   DeleteModal,
-} from "@/components";
-import { Users } from "lucide-react";
-
+} from "@/components"
+import { Users } from "lucide-react"
 
 export const ClientsPage = () => {
   const {
@@ -21,14 +20,12 @@ export const ClientsPage = () => {
     totalPages,
     fetchClients,
     isLoading,
-  } = useClientStore();
+  } = useClientStore()
 
   useEffect(() => {
-    useClientStore.getState().setIsLoading(true);
-    fetchClients();
-  }, [perPage, currentPage]);
-
-
+    useClientStore.getState().setIsLoading(true)
+    fetchClients()
+  }, [perPage, currentPage, fetchClients])
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
@@ -60,18 +57,16 @@ export const ClientsPage = () => {
             <div className="flex flex-col justify-center items-center h-[300px] text-gray-500 mx-4 mt-6 rounded-md">
               <Users className="w-12 h-12 text-orange-400 mb-4" />
               <p className="text-lg text-center px-4">
-                Nenhum cliente cadastrado no momento.<br />
+                Nenhum cliente cadastrado no momento.
+                <br />
                 Clique em “Criar cliente” para começar.
               </p>
             </div>
           )}
-
-
         </div>
       </div>
       <ClientModal />
       <DeleteModal />
     </div>
-  );
-};
-
+  )
+}

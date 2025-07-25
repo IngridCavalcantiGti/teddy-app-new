@@ -1,7 +1,7 @@
-import { Routes, Route } from "react-router-dom";
-import { Suspense } from "react";
-import { LoginPage, ClientsPage, ClientsSelectedPage } from "@/pages";
-import { AuthenticatedLayout } from "@/layouts";
+import { Routes, Route } from "react-router-dom"
+import { Suspense } from "react"
+import { LoginPage, ClientsPage, ClientsSelectedPage } from "@/pages"
+import { AuthenticatedLayout } from "@/layouts"
 
 const AppRoutes = () => {
   return (
@@ -26,7 +26,7 @@ const AppRoutes = () => {
         <Route path="selected-clients" element={<ClientsSelectedPage />} />
       </Route>
     </Routes>
-  );
-};
+  )
+}
 
-export { AppRoutes };
+export { AppRoutes }

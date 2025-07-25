@@ -1,11 +1,11 @@
-import { User } from "lucide-react";
-import { ClientButton, ClientGrid } from "@/components";
-import { useClientStore } from "@/stores";
+import { User } from "lucide-react"
+import { ClientButton, ClientGrid } from "@/components"
+import { useClientStore } from "@/stores"
 
 const ClientsSelectedPage = () => {
-  const selectedClients = useClientStore((state) => state.selectedClients);
+  const selectedClients = useClientStore((state) => state.selectedClients)
 
-  const hasSelected = selectedClients.length > 0;
+  const hasSelected = selectedClients.length > 0
 
   return (
     <div className="min-h-screen bg-gray-100 flex">
@@ -34,7 +34,7 @@ const ClientsSelectedPage = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export { ClientsSelectedPage };
+export { ClientsSelectedPage }

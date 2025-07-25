@@ -1,18 +1,18 @@
-import { useLocation } from "react-router-dom";
-import { useClientModalStore, useClientStore } from "@/stores";
+import { useLocation } from "react-router-dom"
+import { useClientModalStore, useClientStore } from "@/stores"
 
 const ClientButton = () => {
-  const location = useLocation();
-  const isSelectedPage = location.pathname.includes("selecionados");
-  const clearSelected = useClientStore((state) => state.clearSelected);
+  const location = useLocation()
+  const isSelectedPage = location.pathname.includes("selecionados")
+  const clearSelected = useClientStore((state) => state.clearSelected)
 
   const handleClick = () => {
     if (isSelectedPage) {
-      clearSelected();
+      clearSelected()
     } else {
-      useClientModalStore.getState().openModal("create");
+      useClientModalStore.getState().openModal("create")
     }
-  };
+  }
 
   return (
     <div className="my-6 font-bold">
@@ -23,7 +23,7 @@ const ClientButton = () => {
         {isSelectedPage ? "Limpar clientes selecionados" : "Criar cliente"}
       </button>
     </div>
-  );
-};
+  )
+}
 
-export { ClientButton };
+export { ClientButton }

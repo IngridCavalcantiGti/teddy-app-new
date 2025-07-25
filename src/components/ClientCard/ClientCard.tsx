@@ -1,52 +1,42 @@
-import { Trash2, Plus, Pencil, Minus } from "lucide-react";
-import {
-  useClientModalStore,
-  useDeleteModalStore,
-  useClientStore,
-} from "@/stores";
+import { Trash2, Plus, Pencil, Minus } from "lucide-react"
+import { useClientModalStore, useDeleteModalStore, useClientStore } from "@/stores"
 
-import { useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom"
 
 interface ClientCardProps {
-  id: number;
-  name: string;
-  salary: number;
-  companyValuation: number;
+  id: number
+  name: string
+  salary: number
+  companyValuation: number
 }
 
 const formatCurrency = (value: number): string => {
   return `R$ ${value.toLocaleString("pt-BR", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  })}`;
-};
+  })}`
+}
 
-const ClientCard = ({
-  id,
-  name,
-  salary,
-  companyValuation,
-}: ClientCardProps) => {
-  const { openModal } = useClientModalStore();
-  const { openDeleteModal } = useDeleteModalStore();
-  const location = useLocation();
-  const isSelectedPage = location.pathname.includes("selected");
+const ClientCard = ({ id, name, salary, companyValuation }: ClientCardProps) => {
+  const { openModal } = useClientModalStore()
+  const { openDeleteModal } = useDeleteModalStore()
+  const location = useLocation()
+  const isSelectedPage = location.pathname.includes("selected")
 
-  const { addToSelected, removeFromSelected, isSelected, clients } =
-    useClientStore();
+  const { addToSelected, removeFromSelected, isSelected, clients } = useClientStore()
 
-  const selected = isSelected(id);
+  const selected = isSelected(id)
 
   const handleToggle = () => {
-    const client = clients.find((c) => c.id === id);
-    if (!client) return;
+    const client = clients.find((c) => c.id === id)
+    if (!client) return
 
     if (selected) {
-      removeFromSelected(id);
+      removeFromSelected(id)
     } else {
-      addToSelected(client);
+      addToSelected(client)
     }
-  };
+  }
 
   const handleEdit = () => {
     openModal("edit", {
@@ -54,8 +44,8 @@ const ClientCard = ({
       name,
       salary,
       companyValuation,
-    });
-  };
+    })
+  }
 
   return (
     <div
@@ -64,9 +54,7 @@ const ClientCard = ({
     >
       <div className="flex-1 flex flex-col items-center justify-center text-center">
         <strong className="text-sm break-words max-w-full mb-3">{name}</strong>
-        <p className="text-sm break-words max-w-full">
-          Salário: {formatCurrency(salary)}
-        </p>
+        <p className="text-sm break-words max-w-full">Salário: {formatCurrency(salary)}</p>
         <p className="text-sm break-words max-w-full">
           Empresa: {formatCurrency(companyValuation)}
         </p>
@@ -74,16 +62,12 @@ const ClientCard = ({
 
       <div
         className={`mt-2 mb-2 ${
-          isSelectedPage
-            ? "flex justify-end pr-4 text-red-500"
-            : "flex justify-around gap-20"
+          isSelectedPage ? "flex justify-end pr-4 text-red-500" : "flex justify-around gap-20"
         }`}
       >
         <button
           onClick={handleToggle}
-          title={
-            selected ? "Remover dos selecionados" : "Adicionar aos selecionados"
-          }
+          title={selected ? "Remover dos selecionados" : "Adicionar aos selecionados"}
         >
           {selected ? <Minus /> : <Plus aria-label="adicionar cliente" />}
         </button>
@@ -99,7 +83,7 @@ const ClientCard = ({
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export { ClientCard };
+export { ClientCard }
