@@ -26,7 +26,7 @@ const ClientsPage = () => {
   return (
     <div className="min-h-screen bg-gray-100 flex">
       <div className="flex-1 w-full">
-        <div className="max-w-screen-xl mx-auto">
+        <div className="mx-auto">
           <ClientsHeader
             totalClients={clients.length}
             perPage={perPage}
@@ -34,9 +34,9 @@ const ClientsPage = () => {
           />
 
           <div className="w-full px-4">
-            
-              <ClientGrid clients={clients} />
-          
+
+            <ClientGrid clients={clients} />
+
           </div>
           <ClientButton />
           <Pagination
