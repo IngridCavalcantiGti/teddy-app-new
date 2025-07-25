@@ -18,7 +18,11 @@ const ClientsSelectedPage = () => {
               </span>
               <div className="px-4">
                 <ClientGrid clients={selectedClients} />
-                <Button label="Limpar clientes selecionados" onClick={clearSelected} />
+                <Button
+                  label="Limpar clientes selecionados"
+                  onClick={clearSelected}
+                  className="my-6"
+                />
               </div>
             </>
           ) : (

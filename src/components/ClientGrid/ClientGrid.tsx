@@ -1,5 +1,4 @@
 import { ClientCard } from "@/components"
-import type { Client } from "@/types/clientTypes"
 
 interface ClientsGridProps {
   clients: Client[]

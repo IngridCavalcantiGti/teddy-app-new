@@ -50,7 +50,7 @@ export const ClientsPage = () => {
               <div className="w-full px-4">
                 <ClientGrid clients={clients} />
               </div>
-              <Button label="Criar cliente" onClick={handleClick} />
+              <Button label="Criar cliente" onClick={handleClick} className="my-6" />
               <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
@@ -65,6 +65,7 @@ export const ClientsPage = () => {
                 <br />
                 Clique em “Criar cliente” para começar.
               </p>
+              <Button label="Criar cliente" onClick={handleClick} className="my-6" />
             </div>
           )}
         </div>

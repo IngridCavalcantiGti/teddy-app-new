@@ -1,3 +1,5 @@
+import storybook from "eslint-plugin-storybook";
+
 import js from "@eslint/js";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -9,7 +11,7 @@ import { globalIgnores } from "eslint/config";
 export default tseslint.config([
   globalIgnores(["dist"]),
   {
-    files: ["src/**/*.{ts,tsx}"],
+    files: ["src/*/.{ts,tsx}"],
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
@@ -34,4 +36,4 @@ export default tseslint.config([
       globals: globals.browser,
     },
   },
-]);
+], storybook.configs["flat/recommended"]);

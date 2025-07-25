@@ -1,5 +1,6 @@
 import { useDeleteModalStore, useAlertStore, useClientStore } from "@/stores"
 import { X } from "lucide-react"
+import { Button } from "../Button"
 
 const DeleteModal = () => {
   const { isOpen, clientId, clientName, closeDeleteModal } = useDeleteModalStore()
@@ -40,12 +41,7 @@ const DeleteModal = () => {
           Você está prestes a excluir o cliente: <strong>{clientName}</strong>
         </p>
 
-        <button
-          onClick={handleDelete}
-          className="bg-orange-500 cursor-pointer hover:bg-orange-600 text-white w-full py-2 rounded font-semibold"
-        >
-          Excluir cliente
-        </button>
+        <Button onClick={handleDelete} variant="filled" label="Excluir cliente" />
       </div>
     </div>
   )

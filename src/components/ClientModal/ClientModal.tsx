@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { clientSchema } from "@/schemas"
 import { useEffect } from "react"
+import { Button } from "../Button"
 
 type ClientFormData = {
   name: string
@@ -150,12 +151,11 @@ const ClientModal = () => {
             <p className="text-red-500 text-sm mb-4">{errors.companyValuation.message}</p>
           )}
 
-          <button
+          <Button
             type="submit"
-            className="bg-orange-500 text-white px-4 py-2 rounded w-full hover:bg-orange-600 cursor-pointer"
-          >
-            {mode === "create" ? "Criar cliente" : "Editar cliente"}
-          </button>
+            variant="filled"
+            label={mode === "create" ? "Criar cliente" : "Editar cliente"}
+          />
         </form>
       </div>
     </div>
