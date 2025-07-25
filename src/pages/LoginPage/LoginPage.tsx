@@ -1,16 +1,19 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import { useClientStore } from '@/stores';
 
 export const LoginPage = () => {
     const [name, setName] = useState('')
     const navigate = useNavigate()
-    const { setUsername } = useClientStore();
+    const { username, setUsername, } = useClientStore();
 
     const handleLogin = () => {
         if (!name.trim()) return
         navigate('/clients')
         setUsername(name);
+        if (username) {
+            return <Navigate to="/clients" replace />;
+        }
 
     }
 

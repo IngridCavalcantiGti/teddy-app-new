@@ -1,4 +1,4 @@
-** 📖 Descrição
+## 📖 Descrição
 Aplicação simples de gerenciamento de clientes desenvolvida com React + Vite.
 Permite criar, atualizar, excluir e selecionar clientes utilizando uma API paginada.
 O gerenciamento de estado é feito com Zustand e as requisições com Axios utilizando interceptors.
