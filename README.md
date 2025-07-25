@@ -4,6 +4,12 @@ Aplicação simples de gerenciamento de clientes desenvolvida com React + Vite.
 Permite criar, atualizar, excluir e selecionar clientes utilizando uma API paginada.
 O gerenciamento de estado é feito com Zustand e as requisições com Axios utilizando interceptors.
 
+## 🌐 Preview
+
+- 🔗 **Aplicação Online:** [App](https://teddy-app-new.vercel.app)
+- 📚 **Docs:** [Storybook](https://ingridcavalcantigti.github.io/teddy-app-new/)
+  ✅
+
 ## ✅ Requisitos Atendidos
 
 - [x] Utilização de **TypeScript**
@@ -25,6 +31,15 @@ As melhorias abaixo não estavam nos requisitos originais, foram adicionadas par
 - [x] Criação de pipeline de lint para manter padrão de código.
 - [x] Criação de pipeline de testes unitários com Jest/Vitest.
 - [x] Configuração de VSCode para formatar automaticamente ao salvar.
+- [x] Configuração de Storybook para documentar e visualizar os componentes isoladamente.
+- [x] Deploy automático do Storybook via GitHub Pages integrado à pipeline CI/CD.
+
+## 🚀 Melhorias Futuras
+
+- [ ] Implementar **autenticação e autorização** para gerenciar acessos.
+- [ ] Adicionar **testes de integração e e2e** (ex.: Cypress/Playwright).
+- [ ] Criar **tema dark/light** e suporte a customização de UI.
+- [ ] Integrar **CI/CD completo** com deploy automático na Vercel apenas se todos os testes e lint passarem.
 
 ## 🛠️ Tecnologias
 
