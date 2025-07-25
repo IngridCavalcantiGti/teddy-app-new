@@ -70,7 +70,7 @@ const ClientCard = ({ id, name, salary, companyValuation }: Props) => {
           }`}
       >
         <button onClick={handleToggle} title={selected ? "Remover dos selecionados" : "Adicionar aos selecionados"}>
-          {selected ? <Minus /> : <Plus />}
+          {selected ? <Minus /> : <Plus aria-label="adicionar cliente"/>}
         </button>
         {!isSelectedPage && (
           <>
