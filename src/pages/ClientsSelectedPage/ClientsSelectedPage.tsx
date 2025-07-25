@@ -1,10 +1,10 @@
 import { User } from "lucide-react"
-import { ClientButton, ClientGrid } from "@/components"
+import { Button, ClientGrid } from "@/components"
 import { useClientStore } from "@/stores"
 
 const ClientsSelectedPage = () => {
   const selectedClients = useClientStore((state) => state.selectedClients)
-
+  const clearSelected = useClientStore((state) => state.clearSelected)
   const hasSelected = selectedClients.length > 0
 
   return (
@@ -18,7 +18,7 @@ const ClientsSelectedPage = () => {
               </span>
               <div className="px-4">
                 <ClientGrid clients={selectedClients} />
-                <ClientButton />
+                <Button label="Limpar clientes selecionados" onClick={clearSelected} />
               </div>
             </>
           ) : (

@@ -1,12 +1,12 @@
 import { useEffect } from "react"
-import { useClientStore } from "@/stores"
+import { useClientModalStore, useClientStore } from "@/stores"
 import {
-  ClientButton,
   ClientGrid,
   ClientsHeader,
   Pagination,
   ClientModal,
   DeleteModal,
+  Button,
 } from "@/components"
 import { Users } from "lucide-react"
 
@@ -27,6 +27,10 @@ export const ClientsPage = () => {
     fetchClients()
   }, [perPage, currentPage, fetchClients])
 
+  const handleClick = () => {
+    useClientModalStore.getState().openModal("create")
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 flex">
       <div className="flex-1 w-full">
@@ -46,7 +50,7 @@ export const ClientsPage = () => {
               <div className="w-full px-4">
                 <ClientGrid clients={clients} />
               </div>
-              <ClientButton />
+              <Button label="Criar cliente" onClick={handleClick} />
               <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}

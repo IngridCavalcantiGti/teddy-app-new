@@ -1,5 +1,5 @@
 export * from "./Alert"
-export * from "./ClientButton"
+export * from "./Button"
 export * from "./ClientCard"
 export * from "./ClientGrid"
 export * from "./ClientModal"
