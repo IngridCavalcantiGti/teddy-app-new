@@ -1,6 +1,6 @@
 import React from "react"
 import logo from "@/assets/teddy.svg"
-import iconMenu from "@/assets/menu-svgrepo.svg"
+import iconMenu from "@/assets/menu.svg"
 import { useLocation, Link, useNavigate } from "react-router-dom"
 import { useClientStore } from "@/stores"
 
