@@ -1,16 +1,17 @@
 import { useEffect } from "react";
-
-import ClientButton from "../../components/ClientButton/ClientButton";
-import ClientGrid from "../../components/ClientGrid/ClientGrid";
-import ClientsHeader from "../../components/ClientsHeader/ClientsHeader";
-import Pagination from "../../components/Pagination/Pagination";
-import ClientModal from '../../components/ClientModal/ClientModal';
-import DeleteModal from '../../components/DeleteModal/DeleteModal';
-import { useClientStore } from "../../stores/useClientStore";
+import { useClientStore } from "@/stores";
+import {
+  ClientButton,
+  ClientGrid,
+  ClientsHeader,
+  Pagination,
+  ClientModal,
+  DeleteModal,
+} from "@/components";
 import { Users } from "lucide-react";
 
 
-const ClientsPage = () => {
+export const ClientsPage = () => {
   const {
     clients,
     perPage,
@@ -19,7 +20,7 @@ const ClientsPage = () => {
     setCurrentPage,
     totalPages,
     fetchClients,
-     isLoading,
+    isLoading,
   } = useClientStore();
 
   useEffect(() => {
@@ -73,6 +74,4 @@ const ClientsPage = () => {
     </div>
   );
 };
-
-export default ClientsPage;
 

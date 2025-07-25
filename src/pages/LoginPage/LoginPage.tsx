@@ -1,15 +1,15 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useClientStore } from '../../stores/useClientStore';
+import { useClientStore } from '@/stores';
 
-export default function LoginPage() {
+export const LoginPage = () => {
     const [name, setName] = useState('')
     const navigate = useNavigate()
     const { setUsername } = useClientStore();
 
     const handleLogin = () => {
         if (!name.trim()) return
-        navigate('/clientes')
+        navigate('/clients')
         setUsername(name);
 
     }

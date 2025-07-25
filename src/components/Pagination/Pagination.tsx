@@ -4,7 +4,11 @@ interface PaginationProps {
   totalPages: number;
 }
 
-const Pagination = ({ currentPage, setCurrentPage, totalPages }: PaginationProps) => {
+const Pagination = ({
+  currentPage,
+  setCurrentPage,
+  totalPages,
+}: PaginationProps) => {
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   return (
@@ -15,8 +19,8 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }: PaginationProps
           onClick={() => setCurrentPage(page)}
           className={`px-3 py-1 rounded ${
             currentPage === page
-              ? 'bg-orange-500 text-white'
-              : 'text-gray-700 hover:bg-gray-300'
+              ? "bg-orange-500 text-white"
+              : "text-gray-700 hover:bg-gray-300"
           }`}
         >
           {page}
@@ -26,4 +30,4 @@ const Pagination = ({ currentPage, setCurrentPage, totalPages }: PaginationProps
   );
 };
 
-export default Pagination;
+export { Pagination };

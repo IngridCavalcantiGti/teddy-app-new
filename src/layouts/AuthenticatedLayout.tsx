@@ -1,28 +1,27 @@
-
-import Header from "../components/Header/Header";
+import { Header, Sidebar } from "@/components";
 import { Outlet } from "react-router-dom";
-import Sidebar from "../components/Sidebar/Sidebar";
 import { useState } from "react";
 
-export default function AuthenticatedLayout() {
+const AuthenticatedLayout = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const handleToggleSidebar = () => {
+    setIsSidebarOpen((prev) => !prev);
+  };
 
-    const handleToggleSidebar = () => {
-        setIsSidebarOpen(prev => !prev);
-    };
+  const handleCloseSidebar = () => {
+    setIsSidebarOpen(false);
+  };
 
-    const handleCloseSidebar = () => {
-        setIsSidebarOpen(false);
-    };
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <Header onToggleSidebar={handleToggleSidebar} />
+      <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
+      <main className="px-15 py-6">
+        <Outlet />
+      </main>
+    </div>
+  );
+};
 
-    return (
-        <div className="min-h-screen bg-gray-100">
-            <Header onToggleSidebar={handleToggleSidebar} />
-             <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
-            <main className="px-15 py-6">
-                <Outlet />
-            </main>
-        </div>
-    );
-}
+export { AuthenticatedLayout };

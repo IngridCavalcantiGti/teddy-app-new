@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import ClientCard from './ClientCard';
+import { ClientCard } from './ClientCard';
+
 
 describe('ClientCard', () => {
     it('renders the name, button, salary, and company valuation', () => {

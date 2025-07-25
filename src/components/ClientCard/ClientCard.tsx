@@ -1,36 +1,39 @@
-import { Trash2, Plus, Pencil, Minus } from 'lucide-react';
-import { useClientModalStore } from '../../stores/useClientModalStore';
-import { useDeleteModalStore } from '../../stores/useDeleteModalStore';
-import { useClientStore } from '../../stores/useClientStore';
-import { useLocation } from 'react-router-dom';
+import { Trash2, Plus, Pencil, Minus } from "lucide-react";
+import {
+  useClientModalStore,
+  useDeleteModalStore,
+  useClientStore,
+} from "@/stores";
 
-interface Props {
-  id: number
+import { useLocation } from "react-router-dom";
+
+interface ClientCardProps {
+  id: number;
   name: string;
   salary: number;
   companyValuation: number;
 }
 
 const formatCurrency = (value: number): string => {
-  return `R$ ${value.toLocaleString('pt-BR', {
+  return `R$ ${value.toLocaleString("pt-BR", {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   })}`;
 };
 
-const ClientCard = ({ id, name, salary, companyValuation }: Props) => {
+const ClientCard = ({
+  id,
+  name,
+  salary,
+  companyValuation,
+}: ClientCardProps) => {
   const { openModal } = useClientModalStore();
   const { openDeleteModal } = useDeleteModalStore();
   const location = useLocation();
-  const isSelectedPage = location.pathname.includes('selecionados');
+  const isSelectedPage = location.pathname.includes("selected");
 
-
-  const {
-    addToSelected,
-    removeFromSelected,
-    isSelected,
-    clients
-  } = useClientStore();
+  const { addToSelected, removeFromSelected, isSelected, clients } =
+    useClientStore();
 
   const selected = isSelected(id);
 
@@ -46,7 +49,7 @@ const ClientCard = ({ id, name, salary, companyValuation }: Props) => {
   };
 
   const handleEdit = () => {
-    openModal('edit', {
+    openModal("edit", {
       id,
       name,
       salary,
@@ -55,22 +58,34 @@ const ClientCard = ({ id, name, salary, companyValuation }: Props) => {
   };
 
   return (
-    <div className="bg-white rounded-[4px] shadow-[0_0_4px_rgba(0,0,0,0.1)] w-full min-w-[250px]
-        min-h-[138px] flex flex-col justify-between px-4 py-2 overflow-hidden break-words mt-4">
+    <div
+      className="bg-white rounded-[4px] shadow-[0_0_4px_rgba(0,0,0,0.1)] w-full min-w-[250px]
+        min-h-[138px] flex flex-col justify-between px-4 py-2 overflow-hidden break-words mt-4"
+    >
       <div className="flex-1 flex flex-col items-center justify-center text-center">
         <strong className="text-sm break-words max-w-full mb-3">{name}</strong>
-        <p className="text-sm break-words max-w-full">Salário: {formatCurrency(salary)}</p>
-        <p className="text-sm break-words max-w-full">Empresa: {formatCurrency(companyValuation)}</p>
+        <p className="text-sm break-words max-w-full">
+          Salário: {formatCurrency(salary)}
+        </p>
+        <p className="text-sm break-words max-w-full">
+          Empresa: {formatCurrency(companyValuation)}
+        </p>
       </div>
 
       <div
-        className={`mt-2 mb-2 ${isSelectedPage
-            ? 'flex justify-end pr-4 text-red-500' 
-            : 'flex justify-around gap-20'
-          }`}
+        className={`mt-2 mb-2 ${
+          isSelectedPage
+            ? "flex justify-end pr-4 text-red-500"
+            : "flex justify-around gap-20"
+        }`}
       >
-        <button onClick={handleToggle} title={selected ? "Remover dos selecionados" : "Adicionar aos selecionados"}>
-          {selected ? <Minus /> : <Plus aria-label="adicionar cliente"/>}
+        <button
+          onClick={handleToggle}
+          title={
+            selected ? "Remover dos selecionados" : "Adicionar aos selecionados"
+          }
+        >
+          {selected ? <Minus /> : <Plus aria-label="adicionar cliente" />}
         </button>
         {!isSelectedPage && (
           <>
@@ -82,10 +97,9 @@ const ClientCard = ({ id, name, salary, companyValuation }: Props) => {
             </button>
           </>
         )}
-
       </div>
     </div>
   );
 };
 
-export default ClientCard;
+export { ClientCard };

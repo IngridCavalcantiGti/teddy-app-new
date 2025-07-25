@@ -1,69 +1,75 @@
-# React + TypeScript + Vite
+** 📖 Descrição
+Aplicação simples de gerenciamento de clientes desenvolvida com React + Vite.
+Permite criar, atualizar, excluir e selecionar clientes utilizando uma API paginada.
+O gerenciamento de estado é feito com Zustand e as requisições com Axios utilizando interceptors.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## ✅ Requisitos Atendidos
 
-Currently, two official plugins are available:
+- [x] Utilização de **TypeScript**
+- [x] Utilização de **React + Vite** (versão mais recente)
+- [ ] Arquitetura microfrontends
+- [x] Aplicação responsiva
+- [x] Utilização de Docker para containerizar a aplicação
+- [x] Deploy feito na **Vercel**
+- [x] Inclusão de melhorias (refatoração, organização, boas práticas)
+- [x] Criação do **README** com instruções
+- [x] Criação de um vídeo demonstrando toda a aplicação
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tecnologias
+- React
+- Vite
+- TypeScript
+- Zustand
+- Yup
+- Tailwind
+- Axios
+- React Router
 
-## Expanding the ESLint configuration
+## 🚀 Como Rodar o Projeto
+### 🔹 Localmente (sem Docker)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. **Clone o repositório:**
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone https://github.com/IngridCavalcantiGti/teddy-app-new
+cd teddy-app-new
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Instalar dependências:
+```bash
+npm install
+```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+3. Rode o app:
+```bash
+npm run dev
+```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+4. Acesse no navegador:
+```bash
+http://localhost:5173
+```
+
+### 🔹 Com Docker
+
+1. **Clone o repositório:**
+
+```bash
+git clone https://github.com/IngridCavalcantiGti/teddy-app-new
+cd teddy-app-new
+```
+
+2. Build da imagem Docker:
+```bash
+docker build -t teddy-app .
+```
+
+2. Rodar o container:
+```bash
+docker run -p 5173:5173 teddy-app
+```
+
+3. Acesse no navegador:
+```bash
+http://localhost:5173
 ```

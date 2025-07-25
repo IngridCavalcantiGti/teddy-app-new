@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import type { Client, NewClient } from '../types/clientTypes';
-import { api } from '../services/api';
+import type { Client, NewClient } from '@/types/clientTypes';
+import { api } from '@/services/api';
 
 interface ClientState {
   clients: Client[];
