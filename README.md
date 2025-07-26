@@ -7,8 +7,8 @@ O gerenciamento de estado é feito com Zustand e as requisições com Axios util
 ## 🌐 Preview
 
 - 🔗 **Aplicação Online:** [App](https://teddy-app-new.vercel.app)
-- 📚 **Docs:** [Storybook](https://ingridcavalcantigti.github.io/teddy-app-new/)
-  ✅
+- 📚 **Docs:** [Storybook](https://teddy-app-new-storybook.vercel.app/)
+
 
 ## ✅ Requisitos Atendidos
 
@@ -32,7 +32,7 @@ As melhorias abaixo não estavam nos requisitos originais, foram adicionadas par
 - [x] Criação de pipeline de testes unitários com Jest/Vitest.
 - [x] Configuração de VSCode para formatar automaticamente ao salvar.
 - [x] Configuração de Storybook para documentar e visualizar os componentes isoladamente.
-- [x] Deploy automático do Storybook via GitHub Pages integrado à pipeline CI/CD.
+- [x] Deploy do Storybook na Vercel.
 
 ## 🚀 Melhorias Futuras
 
