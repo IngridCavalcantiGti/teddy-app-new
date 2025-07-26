@@ -1,4 +1,4 @@
-name: CI - Lint, Test & Storybook Deploy
+name: CI - Lint, Test 
 
 on:
   push:
@@ -29,13 +29,3 @@ jobs:
       - name: 🧪 Run Unit Tests
         run: npm run test -- --coverage
 
-      - name: 📖 Build Storybook
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        run: npm run build-storybook
-
-      - name: 🚀 Deploy Storybook to GitHub Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./storybook-static
