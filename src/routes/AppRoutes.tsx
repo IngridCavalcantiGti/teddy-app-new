@@ -2,12 +2,14 @@ import { Routes, Route } from "react-router-dom"
 import { Suspense } from "react"
 import { LoginPage, ClientsPage, ClientsSelectedPage } from "@/pages"
 import { AuthenticatedLayout } from "@/layouts"
+import { WellcomePage } from "@/pages/WellcomePage"
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<LoginPage />} />
       <Route element={<AuthenticatedLayout />}>
+        <Route path="/home" element={<WellcomePage />} />
         <Route
           path="clients"
           element={

@@ -39,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
 
         <nav className="flex flex-col gap-6 px-6 py-10 text-[15px] font-medium">
           <Link
-            to="/"
+            to="/home"
             className={`flex items-center gap-3 ${
               isActive("/") ? "text-orange-600" : "text-black hover:text-orange-500"
             }`}
